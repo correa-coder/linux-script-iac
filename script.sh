@@ -28,30 +28,20 @@ chown root:GRP_SEC /sec
 
 # create users
 echo "Criando usuários..."
-useradd adm1 -m -s /bin/bash -G GRP_ADM
-useradd adm2 -m -s /bin/bash -G GRP_ADM
-useradd ven1 -m -s /bin/bash -G GRP_VEN
-useradd ven2 -m -s /bin/bash -G GRP_VEN
-useradd sec1 -m -s /bin/bash -G GRP_SEC
-useradd sec2 -m -s /bin/bash -G GRP_SEC
+useradd adm1 -m -s /bin/bash -G GRP_ADM -p $(openssl passwd -1 adm1)
+useradd adm2 -m -s /bin/bash -G GRP_ADM -p $(openssl passwd -1 adm2)
+useradd ven1 -m -s /bin/bash -G GRP_VEN -p $(openssl passwd -1 ven1)
+useradd ven2 -m -s /bin/bash -G GRP_VEN -p $(openssl passwd -1 ven2)
+useradd sec1 -m -s /bin/bash -G GRP_SEC -p $(openssl passwd -1 sec1)
+useradd sec2 -m -s /bin/bash -G GRP_SEC -p $(openssl passwd -1 sec2)
 
-echo "Senha para adm1:"
-passwd adm1
-
-echo "Senha para adm2:"
-passwd adm2
-
-echo "Senha para ven1:"
-passwd ven1
-
-echo "Senha para ven2:"
-passwd ven2
-
-echo "Senha para sec1:"
-passwd sec1
-
-echo "Senha para sec2:"
-passwd sec2
+# expire passwords so users can choose a new one on first login
+passwd -e adm1
+passwd -e adm2
+passwd -e ven1
+passwd -e ven2
+passwd -e sec1
+passwd -e sec2
 
 echo "Criado os seguintes usuários: adm1, adm2, ven1, ven2, sec1, sec2"
 
